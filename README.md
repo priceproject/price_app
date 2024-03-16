@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # book_shopdomi
 
 A new Flutter project.
@@ -14,3 +15,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# price_app
+A cross-platform bookshop app designed with flutter
+>>>>>>> 7c34eec58c21159e5e3a767a098720c6ee1cddfc
