@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../screens/forget_password_screen.dart';
+import 'package:price_app/features/authentication/forget_password_screen.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({

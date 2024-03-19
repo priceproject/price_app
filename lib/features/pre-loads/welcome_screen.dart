@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:price_app/screens/registration_screen1.dart';
-import '../components/my_text_button.dart';
-import 'login_screen.dart';
+import 'package:price_app/features/registration/registration_screen1.dart';
+import 'package:price_app/features/components/my_text_button.dart';
+import 'package:price_app/features/authentication/login_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override

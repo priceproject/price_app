@@ -1,12 +1,12 @@
-import 'package:price_app/components/appbar_leading_arrow.dart';
-import 'package:price_app/constants.dart';
+import 'package:price_app/features/components/appbar_leading_arrow.dart';
+import 'package:price_app/features/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:price_app/components/my_text_field.dart';
-import '../components/bottom_action_text.dart';
-import '../components/my_text_button.dart';
+import 'package:price_app/features/components/my_text_field.dart';
+import 'package:price_app/features/components/bottom_action_text.dart';
+import 'package:price_app/features/components/my_text_button.dart';
 import 'login_screen.dart';
-import 'otp_verification.dart';
+import 'package:price_app/features/authentication/otp_verification.dart';
 
 class ForgetPassword extends StatelessWidget {
   @override
@@ -20,18 +20,18 @@ class ForgetPassword extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text(
+               Text(
                 'Forget Password?',
                 style: KHeadingTextStyle,
               ),
-              const Text(
+               Text(
                 "Don't worry it occurs. "
                 "Please enter the email address used with your account",
                 style: KSubHeadingTextStyle,
               ),
-              const SizedBox(height: 15),
-              MyTextField(placeholder: 'Enter your email'),
-              const SizedBox(height: 80),
+               SizedBox(height: 15),
+              CustomTextField(placeholder: 'Enter your email'),
+               SizedBox(height: 80),
               MyTextButton(
                 onPressed: () {
                   Navigator.push(

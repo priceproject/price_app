@@ -1,10 +1,4 @@
-import 'package:price_app/components/appbar_leading_arrow.dart';
-import 'package:flutter/material.dart';
-import 'package:price_app/components/my_text_field.dart';
-import '../components/bottom_action_text.dart';
-import '../components/my_text_button.dart';
-import '../constants.dart';
-import 'login_screen.dart';
+import 'package:price_app/features/utils/exports.dart';
 
 class Registration2 extends StatelessWidget {
   @override
@@ -21,13 +15,13 @@ class Registration2 extends StatelessWidget {
                 style: KHeadingTextStyle,
               ),
               SizedBox(height: 15),
-              MyTextField(placeholder: 'Gender*'),
+              CustomTextField(placeholder: 'Gender*'),
               SizedBox(height: 10),
-              MyTextField(placeholder: 'Date of Birth*'),
+              CustomTextField(placeholder: 'Date of Birth*'),
               SizedBox(height: 10),
-              MyTextField(placeholder: 'Country of Residence*'),
+              CustomTextField(placeholder: 'Country of Residence*'),
               SizedBox(height: 10),
-              MyTextField(placeholder: 'State of Residence*'),
+              CustomTextField(placeholder: 'State of Residence*'),
               const SizedBox(height: 80),
               MyTextButton(
                 onPressed: () {

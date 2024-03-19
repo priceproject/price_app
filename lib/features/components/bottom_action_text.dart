@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
+import 'package:price_app/features/utils/constants.dart';
 
 class BottomActionText extends StatelessWidget {
 

@@ -1,13 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:price_app/components/my_text_field.dart';
-import 'package:price_app/components/appbar_leading_arrow.dart';
-import 'package:flutter/widgets.dart';
+import 'package:price_app/features/utils/exports.dart';
 
-import '../components/bottom_action_text.dart';
-import '../components/my_text_button.dart';
-import '../constants.dart';
-import 'login_screen.dart';
 
 class Registration1 extends StatelessWidget {
   @override
@@ -17,21 +9,21 @@ class Registration1 extends StatelessWidget {
           leading: AppBarLeadingArrow(),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding:  EdgeInsets.all(20.0.sp),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text('Hello! Register to get Started',
+               Text('Hello! Register to get Started',
                   style: KHeadingTextStyle),
-              const SizedBox(height: 15),
-              MyTextField(placeholder: 'Firstname*'),
-              const SizedBox(height: 10),
-              MyTextField(placeholder: 'Lastname*'),
-              const SizedBox(height: 10),
-              MyTextField(placeholder: 'Email*'),
-              const SizedBox(height: 10),
-              MyTextField(placeholder: 'Phone number*'),
-              const SizedBox(height: 80),
+               SizedBox(height: 15.h,),
+              CustomTextField(placeholder: 'Firstname*'),
+               SizedBox(height: 10.sp),
+              CustomTextField(placeholder: 'Lastname*'),
+               SizedBox(height: 10.sp),
+              CustomTextField(placeholder: 'Email*'),
+               SizedBox(height: 10.h),
+              CustomTextField(placeholder: 'Phone number*'),
+               SizedBox(height: 80.h),
               MyTextButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/registration2');
