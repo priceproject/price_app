@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
-import '../screens/login_screen.dart';
 
 class BottomActionText extends StatelessWidget {
 
