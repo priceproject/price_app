@@ -15,7 +15,7 @@ class _SplashState extends State<Splash> {
   }
 
   _navigateToInitialRoute() async {
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(Duration(seconds: 3));
     Navigator.pushReplacement(
       context, MaterialPageRoute(builder: (context) => WelcomeScreen()),
     );
@@ -34,6 +34,8 @@ class _SplashState extends State<Splash> {
                 'images/livingSeed logo.jpg'),
           ),
         ),
-        child: Image.asset('images/livingSeed text.jpg'),),);
+        child: Image.asset('images/livingSeed text.jpg'),
+      ),
+    );
   }
 }
