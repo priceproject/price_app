@@ -1,10 +1,10 @@
-import 'package:price_app/components/appbar_leading_arrow.dart';
-import 'package:price_app/constants.dart';
+import 'package:price_app/features/components/appbar_leading_arrow.dart';
+import 'package:price_app/features/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:price_app/components/my_text_field.dart';
+import 'package:price_app/features/components/my_text_field.dart';
 
-import '../components/my_text_button.dart';
+import 'package:price_app/features/components/my_text_button.dart';
 
 
 
@@ -21,16 +21,16 @@ class NewPassword extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text('Create new Password',
+               Text('Create new Password',
                 style: KHeadingTextStyle
               ),
               Text('Your new password must be unique from those previously used.',
               style: KSubHeadingTextStyle,
               ),
               const SizedBox(height: 15),
-              MyTextField(placeholder: 'New Password'),
+              CustomTextField(placeholder: 'New Password'),
               const SizedBox(height: 10),
-              MyTextField(
+              CustomTextField(
                   placeholder: 'Confirm Password',),
               const SizedBox(height: 80),
               MyTextButton(buttonText: 'Reset Password', onPressed: () {},),

@@ -1,11 +1,11 @@
-import 'package:price_app/components/appbar_leading_arrow.dart';
-import 'package:price_app/components/bottom_action_text.dart';
-import 'package:price_app/constants.dart';
+import 'package:price_app/features/components/appbar_leading_arrow.dart';
+import 'package:price_app/features/components/bottom_action_text.dart';
+import 'package:price_app/features/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:price_app/components/my_text_field.dart';
-import '../components/my_text_button.dart';
-import '../components/otp_box.dart';
+import 'package:price_app/features/components/my_text_field.dart';
+import 'package:price_app/features/components/my_text_button.dart';
+import 'package:price_app/features/components/otp_box.dart';
 import 'new_password.dart';
 
 
@@ -23,7 +23,7 @@ class Verification extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text('OTP Verification',
+               Text('OTP Verification',
                 style: KHeadingTextStyle,
               ),
               Text('Enter the verification code we just sent on you email address',

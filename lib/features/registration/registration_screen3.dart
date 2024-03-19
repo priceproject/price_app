@@ -1,11 +1,4 @@
-import 'package:price_app/components/appbar_leading_arrow.dart';
-import 'package:price_app/constants.dart';
-import 'package:flutter/material.dart';
-import 'package:price_app/components/my_text_field.dart';
-
-import '../components/bottom_action_text.dart';
-import '../components/my_text_button.dart';
-import 'login_screen.dart';
+import 'package:price_app/features/utils/exports.dart';
 
 class Registration3 extends StatelessWidget {
   @override
@@ -24,12 +17,12 @@ class Registration3 extends StatelessWidget {
                 style: KHeadingTextStyle
               ),
               SizedBox(height: 15),
-              MyTextField(
+              CustomTextField(
                 placeholder: 'Password*',
                 obscureText: true,
               ),
               SizedBox(height: 10),
-              MyTextField(
+              CustomTextField(
                 placeholder: 'Confirm Password',
                 obscureText: true,
               ),

@@ -1,13 +1,13 @@
-import 'package:price_app/components/appbar_leading_arrow.dart';
-import 'package:price_app/components/bottom_action_text.dart';
-import 'package:price_app/constants.dart';
+import 'package:price_app/features/components/appbar_leading_arrow.dart';
+import 'package:price_app/features/components/bottom_action_text.dart';
+import 'package:price_app/features/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:price_app/components/my_text_field.dart';
+import 'package:price_app/features/components/my_text_field.dart';
 import 'package:flutter/widgets.dart';
-import '../components/forgot_pasword_func.dart';
-import '../components/my_text_button.dart';
-import 'registration_screen1.dart';
+import 'package:price_app/features/components/forgot_pasword_func.dart';
+import 'package:price_app/features/components/my_text_button.dart';
+import 'package:price_app/features/registration/registration_screen1.dart';
 
 
 class Login extends StatelessWidget {
@@ -23,13 +23,13 @@ class Login extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text('Welcome back. Glad to see you Again!',
+               Text('Welcome back. Glad to see you Again!',
                 style: KHeadingTextStyle,
               ),
               const SizedBox(height: 15),
-              MyTextField(placeholder: 'PH-Code/Email'),
+              CustomTextField(placeholder: 'PH-Code/Email'),
               const SizedBox(height: 10),
-              MyTextField(
+              CustomTextField(
                   placeholder: 'Enter your Password',
                   obscureText: true),
               ForgotPassword(),
