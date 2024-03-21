@@ -56,6 +56,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "flutter_screenutil",
+      "rootUri": "file:///C:/Users/CAC8/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_screenutil-5.9.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///C:/src/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -233,10 +239,10 @@
       "name": "price_app",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "3.3"
+      "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-03-18T14:28:35.563047Z",
+  "generated": "2024-03-20T12:02:07.021412Z",
   "generator": "pub",
   "generatorVersion": "3.3.1"
 }
