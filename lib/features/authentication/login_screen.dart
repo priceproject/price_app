@@ -1,13 +1,4 @@
-import 'package:price_app/features/components/appbar_leading_arrow.dart';
-import 'package:price_app/features/components/bottom_action_text.dart';
-import 'package:price_app/features/utils/constants.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:price_app/features/components/my_text_field.dart';
-import 'package:flutter/widgets.dart';
-import 'package:price_app/features/components/forgot_pasword_func.dart';
-import 'package:price_app/features/components/my_text_button.dart';
-import 'package:price_app/features/registration/registration_screen1.dart';
+import "package:price_app/features/utils/exports.dart";
 
 
 class Login extends StatelessWidget {

@@ -1,12 +1,4 @@
-import 'package:price_app/features/components/appbar_leading_arrow.dart';
-import 'package:price_app/features/utils/constants.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:price_app/features/components/my_text_field.dart';
-
-import 'package:price_app/features/components/my_text_button.dart';
-
-
+import "package:price_app/features/utils/exports.dart";
 
 class NewPassword extends StatelessWidget {
 

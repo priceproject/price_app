@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-
+import "package:price_app/features/utils/exports.dart";
 
 class OTPBox extends StatelessWidget {
   @override
