@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'welcome_screen.dart';
+import "package:price_app/features/utils/exports.dart";
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
