@@ -14,3 +14,9 @@ final KSubHeadingTextStyle = TextStyle(
   fontSize: 14.sp,
   color: Colors.grey,
 );
+
+final KProfileContainerDecor = BoxDecoration(
+  color: Colors.black12,
+  borderRadius: BorderRadius.circular(5),
+);
+
