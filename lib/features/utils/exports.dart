@@ -23,3 +23,5 @@ export "package:price_app/features/authentication/new_password.dart";
 export 'package:price_app/features/components/otp_box.dart';
 export 'package:price_app/features/authentication/forget_password_screen.dart';
 export 'package:price_app/features/pre-loads/welcome_screen.dart';
+export 'package:price_app/features/user/user_profile.dart';
+export 'package:price_app/features/components/reg_auth_appbar.dart';
