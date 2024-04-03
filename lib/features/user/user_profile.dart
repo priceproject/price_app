@@ -70,35 +70,53 @@ class Profile extends StatelessWidget {
                  ],
                ),
              ),
-             Padding(
-               padding: const EdgeInsets.all(20.0),
-               child: Column(
-                 children: [
-                   SizedBox(height: 30,),
-                   Container(
-                     decoration: BoxDecoration(
-                       border: Border(
-                         bottom: BorderSide(
-                           color: Colors.grey, // Border color
-                           width: 1, // Border width
-                         ),
-                       ),
-                     ),
-                     child: Row(
-                       children: [
-                         Image(image: AssetImage('images/ProfilePage Images/ph-code icon.png'),
-                         ),
-                         SizedBox(width: 15,),
-                         Text('BYE23-M385911')
-                       ],
-                     ),
-                   )
-                 ],
-               ),
+             Column(
+               children: [
+                 SizedBox(height: 30,),
+                 UserDetails(imageLink: 'images/ProfilePage Images/ph-code icon.png', Description: 'BYE23-M385911',),
+                 UserDetails(imageLink: 'images/ProfilePage Images/email icon.png', Description: 'skwaku6@gmail.com',),
+                 UserDetails(imageLink: 'images/ProfilePage Images/phone icon.png', Description: '+2345678912345',),
+                 UserDetails(imageLink: 'images/ProfilePage Images/church icon.png', Description: 'Ghana Baptist Convention',)
+               ],
              )
            ],
          ),
        )
+    );
+  }
+}
+
+class UserDetails extends StatelessWidget {
+  final String imageLink;
+  final String Description;
+  const UserDetails({ required this.imageLink, required this.Description,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(15),
+      alignment: Alignment.centerLeft,
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: Colors.black12, // Border color
+            width: 1, // Border width
+          ),
+        ),
+      ),
+      child: Row(
+        children: [
+          Image(image: AssetImage(imageLink),
+          ),
+          SizedBox(width: 15,),
+          Text(Description, style: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: 14,
+            color: Colors.black87
+          ),)
+        ],
+      ),
     );
   }
 }
