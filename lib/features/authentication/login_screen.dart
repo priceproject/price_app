@@ -24,7 +24,7 @@ class Login extends StatelessWidget {
               ForgotPassword(),
               const SizedBox(height: 80),
               MyTextButton(buttonText: 'Login', onPressed: () {
-                Navigator.pushNamed(context, '/user_profile');
+                Navigator.pushNamed(context, '/cart_zero');
               },),
               Spacer(),
               BottomActionText(question: 'Already have PH-Code?', action: 'Register Here', onTap: (){

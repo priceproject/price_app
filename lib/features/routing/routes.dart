@@ -9,4 +9,5 @@ Map<String,  WidgetBuilder> appRoutes={
 '/registration3': (context) => Registration3(), // Route for Registration3
 '/login': (context) => Login(),
 '/user_profile': (context) => Profile(),
+  '/cart_zero': (context) => CartZero(),
 };
