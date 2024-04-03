@@ -43,6 +43,7 @@ flutter:
   assets:
     - images/
     - images/ProfilePage Images/
+    - images/Cart Images/
 
 
 
