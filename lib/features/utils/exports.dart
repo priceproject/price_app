@@ -29,3 +29,4 @@ export 'package:price_app/features/components/book_scroll_title.dart';
 export 'package:price_app/features/components/custom_bottom_nav.dart';
 export 'package:price_app/features/components/cart_horizontal_scroll view.dart';
 export 'package:price_app/features/cart/cart_zero_page.dart';
+export 'package:price_app/features/components/custom_cart_button.dart';
