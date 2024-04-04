@@ -6,7 +6,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: RegAndAuthAppBar,
+        appBar: CustomAppBar,
         body: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -24,7 +24,7 @@ class Login extends StatelessWidget {
               ForgotPassword(),
               const SizedBox(height: 80),
               MyTextButton(buttonText: 'Login', onPressed: () {
-                Navigator.pushNamed(context, '/cart_zero');
+                Navigator.pushNamed(context, '/pay_successful');
               },),
               Spacer(),
               BottomActionText(question: 'Already have PH-Code?', action: 'Register Here', onTap: (){

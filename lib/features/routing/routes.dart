@@ -10,4 +10,5 @@ Map<String,  WidgetBuilder> appRoutes={
 '/login': (context) => Login(),
 '/user_profile': (context) => Profile(),
   '/cart_zero': (context) => CartZero(),
+  '/pay_successful': (context) => PaySuccessful(),
 };
