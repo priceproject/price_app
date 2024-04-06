@@ -1,11 +1,11 @@
 import "dart:ui";
 import "package:price_app/features/utils/exports.dart";
 
-class CustommCartButton extends StatelessWidget {
+class CustomCartButton extends StatelessWidget {
   final String buttonText;
   final VoidCallback onPressed;
 
-  CustommCartButton({required this.buttonText, required this.onPressed});
+  CustomCartButton({required this.buttonText, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

@@ -32,3 +32,6 @@ export 'package:price_app/features/cart/cart_zero_page.dart';
 export 'package:price_app/features/components/custom_cart_button.dart';
 export 'package:price_app/features/cart/pay_successful.dart';
 export 'package:price_app/features/components/custom_cart_button_two.dart';
+export 'package:price_app/features/cart/cart_1.dart';
+export 'package:price_app/features/components/cart_appbar.dart';
+export 'package:price_app/features/components/custom_checkbox.dart';

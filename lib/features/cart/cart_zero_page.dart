@@ -10,18 +10,7 @@ class CartZero extends StatelessWidget {
     return Expanded(
       child: Scaffold(
         backgroundColor: Color(0xFFDFDFDF),
-        appBar: AppBar(
-          leading: GestureDetector(
-            onTap: (){
-              Navigator.pop(context);
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(top: 16.0, left: 20.0),
-              child: Image.asset('images/back.png'),
-            ),),
-          title: Text('Carts(0)'),
-          centerTitle: true,
-        ),
+        appBar: CartAppBar(customTitle: 'Cart(0)',),
         body: Container(
           margin: EdgeInsets.only(top: 4, bottom: 2),
           color: Colors.white,
@@ -55,7 +44,7 @@ class CartZero extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                       Spacer(),
-                      CustommCartButton(buttonText: 'Continue Browsing', onPressed: (){})
+                      CustomCartButton(buttonText: 'Continue Browsing', onPressed: (){})
                     ],
                   ),
                 ),
@@ -77,4 +66,5 @@ class CartZero extends StatelessWidget {
     );
   }
 }
+
 
