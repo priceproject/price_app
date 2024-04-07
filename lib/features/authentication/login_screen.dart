@@ -1,13 +1,4 @@
-import 'package:price_app/features/components/appbar_leading_arrow.dart';
-import 'package:price_app/features/components/bottom_action_text.dart';
-import 'package:price_app/features/utils/constants.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:price_app/features/components/my_text_field.dart';
-import 'package:flutter/widgets.dart';
-import 'package:price_app/features/components/forgot_pasword_func.dart';
-import 'package:price_app/features/components/my_text_button.dart';
-import 'package:price_app/features/registration/registration_screen1.dart';
+import "package:price_app/features/utils/exports.dart";
 
 
 class Login extends StatelessWidget {
@@ -15,9 +6,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading:AppBarLeadingArrow(),
-        ),
+        appBar: RegAndAuthAppBar,
         body: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -34,7 +23,9 @@ class Login extends StatelessWidget {
                   obscureText: true),
               ForgotPassword(),
               const SizedBox(height: 80),
-              MyTextButton(buttonText: 'Login', onPressed: () {  },),
+              MyTextButton(buttonText: 'Login', onPressed: () {
+                Navigator.pushNamed(context, '/user_profile');
+              },),
               Spacer(),
               BottomActionText(question: 'Already have PH-Code?', action: 'Register Here', onTap: (){
                 Navigator.push(

@@ -4,7 +4,7 @@ class Registration2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(leading: AppBarLeadingArrow()),
+        appBar: RegAndAuthAppBar,
         body: Padding(
           padding: const EdgeInsets.all(18.0),
           child: Column(

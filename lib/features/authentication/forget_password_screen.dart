@@ -1,20 +1,10 @@
-import 'package:price_app/features/components/appbar_leading_arrow.dart';
-import 'package:price_app/features/utils/constants.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:price_app/features/components/my_text_field.dart';
-import 'package:price_app/features/components/bottom_action_text.dart';
-import 'package:price_app/features/components/my_text_button.dart';
-import 'login_screen.dart';
-import 'package:price_app/features/authentication/otp_verification.dart';
+import "package:price_app/features/utils/exports.dart";
 
 class ForgetPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: AppBarLeadingArrow(),
-        ),
+        appBar: RegAndAuthAppBar,
         body: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
