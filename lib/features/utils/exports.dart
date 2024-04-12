@@ -24,6 +24,7 @@ export 'package:price_app/features/components/otp_box.dart';
 export 'package:price_app/features/authentication/forget_password_screen.dart';
 export 'package:price_app/features/pre-loads/welcome_screen.dart';
 export 'package:price_app/features/user/user_profile.dart';
+<<<<<<< HEAD
 export 'package:price_app/features/components/custom_appbar.dart';
 export 'package:price_app/features/components/book_scroll_title.dart';
 export 'package:price_app/features/components/custom_bottom_nav.dart';
@@ -39,3 +40,6 @@ export 'package:price_app/features/cart/confirm_order.dart';
 export 'package:price_app/features/cart/payment_screen.dart';
 export 'package:price_app/features/components/card_image_row.dart';
 export 'package:price_app/features/components/payment_radio_button.dart';
+=======
+export 'package:price_app/features/components/reg_auth_appbar.dart';
+>>>>>>> 2bc3c23b0d99f58320777db4461f6b2c925bf66b
