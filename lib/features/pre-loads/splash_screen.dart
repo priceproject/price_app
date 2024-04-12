@@ -15,7 +15,7 @@ class _SplashState extends State<Splash> {
 
   _navigateToInitialRoute() async {
     await Future.delayed(Duration(seconds: 3));
-    Navigator.pushNamed(context, '/cart_one');
+    Navigator.pushNamed(context, '/payment_screen');
   }
 
   @override
