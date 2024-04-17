@@ -43,10 +43,11 @@ flutter:
   assets:
     - images/
     - images/ProfilePage Images/
-<<<<<<< HEAD
+    - images/study_books_images/
+    - images/outreach_books_images/
+    - images/marriage_books_images/
     - images/Cart Images/
-=======
->>>>>>> 2bc3c23b0d99f58320777db4461f6b2c925bf66b
+
 
 
 
