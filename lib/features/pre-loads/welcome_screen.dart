@@ -3,31 +3,26 @@ import "package:price_app/features/utils/exports.dart";
 class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return Expanded(
       child: Scaffold(
-        body: Column(
-          children: [
-            Flexible(
-              flex: 1,
-              child: Container(
-                // height: 300,
-                decoration: BoxDecoration(
-                  // color: Colors.blue,
-                    image: DecorationImage(
-                        image: AssetImage('images/welcome Screen.png'),
-                        fit: BoxFit.fill
-                    )
-                ),
-                // child: Image.asset('images/welcome Screen.png'),
+            body: Container(
+            alignment: Alignment.topLeft,
+            width: double.infinity,
+            decoration: BoxDecoration(
+            image: DecorationImage(
+            image: AssetImage('images/welcome Screen.png'),
+              fit: BoxFit.fitWidth,
+              alignment: Alignment.topCenter
+              )
               ),
-            ),
-            Flexible(
-              flex: 1,
-              child: Padding(
+              child:Padding(
                 padding: const EdgeInsets.only(top: 80.0, right: 30, left: 30, bottom: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height*0.5,
+                    ),
                     Image(
                       image: AssetImage('images/logo-text.png'),
                       height: 100,
@@ -51,11 +46,9 @@ class WelcomeScreen extends StatelessWidget {
                     },),
                   ],),
               ),
-            )
-          ],
-        ),
-      ),
-    );
+          )
+            ),
+    ); 
   }
 }
 
