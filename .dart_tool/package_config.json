@@ -51,9 +51,9 @@
     },
     {
       "name": "flutter_lints",
-      "rootUri": "file:///C:/Users/CAC8/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-3.0.1",
+      "rootUri": "file:///C:/Users/CAC8/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-3.0.2",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.1"
     },
     {
       "name": "flutter_screenutil",
@@ -171,15 +171,15 @@
     },
     {
       "name": "url_launcher",
-      "rootUri": "file:///C:/Users/CAC8/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher-6.2.5",
+      "rootUri": "file:///C:/Users/CAC8/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher-6.2.6",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "url_launcher_android",
-      "rootUri": "file:///C:/Users/CAC8/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_android-6.3.0",
+      "rootUri": "file:///C:/Users/CAC8/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_android-6.3.1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "url_launcher_ios",
@@ -242,7 +242,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-04-03T19:40:00.542328Z",
+  "generated": "2024-04-12T18:25:01.176702Z",
   "generator": "pub",
   "generatorVersion": "3.3.1"
 }
