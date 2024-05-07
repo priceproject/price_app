@@ -29,7 +29,7 @@ class _StudyBookScreenState extends State<StudyBookScreen> {
     setState(() {
       _currentIndex = index;
     });
-    // Add your navigation logic here
+    navigateToScreen(context, index);
   }
   @override
   Widget build(BuildContext context) {
