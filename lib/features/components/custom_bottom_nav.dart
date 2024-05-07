@@ -24,8 +24,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.library_books),
-          label: 'Resources',
+          icon: Icon(Icons.people),
+          label: 'Community',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.book),

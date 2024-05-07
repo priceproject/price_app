@@ -2,8 +2,10 @@ import 'package:price_app/features/utils/exports.dart';
 
 
 
+void main() {
+  runApp(PriceApp());
+}
 
-void main()=> runApp(PriceApp());
 class PriceApp extends StatelessWidget {
 
   @override

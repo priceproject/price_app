@@ -35,7 +35,7 @@ class _AllBookScreenState extends State<AllBookScreen> {
     setState(() {
       _currentIndex = index;
     });
-    // Add your navigation logic here
+    navigateToScreen(context, index);
   }
   @override
   Widget build(BuildContext context) {
