@@ -22,15 +22,13 @@ class _OutreachBookScreenState extends State<OutreachBookScreen> {
     });
 
     navigateToBookScreen(context, _activeCategory);
-    // Add navigation logic based on the selected category
-    // For example, if category == "Study", navigate to StudyScreen
   }
 
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
-    // Add your navigation logic here
+    navigateToScreen(context, index);
   }
   @override
   Widget build(BuildContext context) {
