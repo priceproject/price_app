@@ -2,17 +2,28 @@ import "package:price_app/features/utils/exports.dart";
 
 class CustomTextField extends StatelessWidget {
   final String placeholder;
-  final bool ?obscureText;
+  final bool obscureText;
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
+  final TextInputType? keyboardType;
 
-  CustomTextField({required this.placeholder, this.obscureText=false});
+  CustomTextField({
+    required this.placeholder,
+    this.obscureText=false,
+    this.controller,
+    this.validator,
+    this.keyboardType,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 50,
-      child: TextField(
-        controller: TextEditingController(),
-        obscureText: obscureText!,
+      child: TextFormField(
+        controller: controller,
+        obscureText: obscureText,
+        validator: validator,
+        keyboardType: keyboardType,
         decoration: InputDecoration(
           border: const OutlineInputBorder(
             borderSide: BorderSide.none,
@@ -32,8 +43,3 @@ class CustomTextField extends StatelessWidget {
     );
   }
 }
-
-
-
-
-

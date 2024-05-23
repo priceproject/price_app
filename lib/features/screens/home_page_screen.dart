@@ -29,7 +29,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
     setState(() {
       _currentIndex = index;
     });
-    // Add your navigation logic here
+    navigateToScreen(context, index);
   }
 
 

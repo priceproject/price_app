@@ -1,8 +1,8 @@
 import 'package:price_app/features/utils/exports.dart';
 
 final KHeadingTextStyle = TextStyle(
-    fontWeight: FontWeight.w900,
-    fontSize: 40.sp,
+    fontWeight: FontWeight.w600,
+    fontSize: 30.sp,
     fontFamily:'Roboto');
 
 final KLinkTextstyle = TextStyle(
