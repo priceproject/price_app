@@ -29,7 +29,7 @@ class _VerificationState extends State<Verification> {
   Future<void> verifyOTP(String email, String otp) async {
     setState(() => _isLoading = true);
     try {
-      final url = Uri.parse('https://bookappbackend-csjm.onrender.com/api/verifyOTP');
+      final url = Uri.parse('https://seedapp.vercel.app/api/verifyOTP');
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},

@@ -39,9 +39,9 @@ class _CustomerSupportPageState extends State<CustomerSupportPage> with WidgetsB
     setState(() => _isLoading = true);
 
     final Email email = Email(
-      body: "${_bodyController.text}\n\nSent from PriceApp",
+      body: "${_bodyController.text}\n\nSent from Seed App",
       subject: _subjectController.text,
-      recipients: ['adefioyed.nysc2019@gmail.com'],
+      recipients: ['price.access1@gmail.com'],
       isHTML: false,
     );
 
@@ -78,7 +78,7 @@ class _CustomerSupportPageState extends State<CustomerSupportPage> with WidgetsB
   }
 
   Future<void> launchWhatsApp() async {
-    const whatsappUrl = "https://wa.me/+2349021408330"; // Replace with your WhatsApp number
+    const whatsappUrl = "https://wa.me/+2348080185270"; // Replace with your WhatsApp number
     if (await canLaunch(whatsappUrl)) {
       await launch(whatsappUrl);
     } else {
@@ -89,7 +89,7 @@ class _CustomerSupportPageState extends State<CustomerSupportPage> with WidgetsB
   }
 
   Future<void> launchTelegram() async {
-    const telegramUrl = "https://t.me/danieladefisoye"; // Replace with your Telegram username
+    const telegramUrl = "https://t.me/NtlePrice"; // Replace with your Telegram username
     if (await canLaunch(telegramUrl)) {
       await launch(telegramUrl);
     } else {

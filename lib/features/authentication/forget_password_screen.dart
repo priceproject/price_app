@@ -19,7 +19,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
 
     try {
       final response = await http.post(
-        Uri.parse('https://bookappbackend-csjm.onrender.com/api/forgetPassword'),
+        Uri.parse('https://seedapp.vercel.app/api/forgetPassword'),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },

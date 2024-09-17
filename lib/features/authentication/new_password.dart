@@ -23,7 +23,7 @@ class _NewPasswordState extends State<NewPassword> {
 
     try {
       final response = await http.post(
-        Uri.parse('https://bookappbackend-csjm.onrender.com/api/resetPassword'),
+        Uri.parse('https://seedapp.vercel.app/api/resetPassword'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'email': widget.email,
