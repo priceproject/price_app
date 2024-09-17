@@ -11,8 +11,8 @@ class PaymentScreen extends StatefulWidget {
 
 
 class _PaymentScreenState extends State<PaymentScreen> {
-  final String publicKey = "FLWPUBK_TEST-7ef89f5811db55af46029254844d17b4-X";
-  final String encryptionKey = "FLWSECK_TEST2e98ed4c4052";
+  final String publicKey = "FLWPUBK-faaac6e3fecc65bb9f192f3a9ca93659-X";
+  final String encryptionKey = "FLWSECK-24dbac6146b9ddff4635e9a5ac58e19b-191d85a9318vt-X";
   final _secureStorage = const FlutterSecureStorage();
   int _currentIndex = 0;
 
