@@ -30,8 +30,8 @@ class _SuggestedBooksContainerState extends State<SuggestedBooksContainer> {
     setState(() => _isLoading = true);
     try {
       final String apiUrl = widget.category.isNotEmpty
-          ? 'https:seedapp.vercel.app/api/suggested?category=${widget.category}'
-          : 'https:seedapp.vercel.app/api/suggested';
+          ? 'https://seedapp.vercel.app/api/suggested?category=${widget.category}'
+          : 'https://seedapp.vercel.app/api/suggested';
       final response = await http.get(Uri.parse(apiUrl));
 
       if (response.statusCode == 200) {

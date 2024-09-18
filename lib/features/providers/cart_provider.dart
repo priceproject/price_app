@@ -31,7 +31,7 @@ class CartProvider with ChangeNotifier {
 
   Future<Map<String, dynamic>> fetchUserCart(String token) async {
     final response = await http.get(
-      Uri.parse('https:seedapp.vercel.app/api/viewCart'),
+      Uri.parse('https://seedapp.vercel.app/api/viewCart'),
       headers: {
         'Authorization': 'Bearer $token',
       },

@@ -9,7 +9,7 @@ class UserProvider with ChangeNotifier {
   Future<void> fetchUserProfile(String userId) async {
     print('Fetching user profile for userId: $userId');
     try {
-      final response = await http.get(Uri.parse('https:seedapp.vercel.app/api/user/userProfile?userId=$userId'));
+      final response = await http.get(Uri.parse('https://seedapp.vercel.app/api/user/userProfile?userId=$userId'));
       print('Response status code: ${response.statusCode}');
       print('Response body: ${response.body}');
 

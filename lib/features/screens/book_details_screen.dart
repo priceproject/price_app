@@ -207,7 +207,13 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
     );
   }
 
+
   Widget _buildActionButtons(BookModel? book, BookProvider bookProvider) {
+    bool isFree = book?.price == null ||
+        book?.price.trim().toLowerCase() == 'free' ||
+        book?.price == '0' ||
+        book!.price.trim().isEmpty;
+
     return Column(
       children: [
         SizedBox(
@@ -232,20 +238,19 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
           height: 30.h,
           child: ElevatedButton(
             onPressed: () async {
-
               if (book?.pdfUrl == null) {
                 _showErrorSnackBar('Book not available. Please check later.');
                 return;
               }
               try {
-                if (book?.price != null && book?.price != 'free') {
-                  await bookProvider.addBookToCart(book!.id);
-                } else {
+                if (isFree) {
                   await bookProvider.addBookToLibrary(book!.id);
+                } else {
+                  await bookProvider.addBookToCart(book!.id);
                 }
 
                 if (bookProvider.error == null) {
-                  _showAddedToCartDialog(book!.price != 'free');
+                  _showAddedToCartDialog(!isFree);
                 } else {
                   if (bookProvider.error!.contains('already in cart')) {
                     _showErrorSnackBar('Book already in Cart', isAlreadyInCart: true);
@@ -267,14 +272,80 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                 borderRadius: BorderRadius.circular(5.r),
               ),
             ),
-            child: Text(book?.price != null && book?.price != 'free'
-                ? 'Add to Cart'
-                : 'Add to Library'),
+            child: Text(isFree ? 'Add to Library' : 'Add to Cart'),
           ),
         ),
       ],
     );
   }
+  // Widget _buildActionButtons(BookModel? book, BookProvider bookProvider) {
+  //   return Column(
+  //     children: [
+  //       SizedBox(
+  //         width: double.infinity,
+  //         height: 30.h,
+  //         child: ElevatedButton(
+  //           onPressed: () => _navigateToPreviewPage(book),
+  //           style: ElevatedButton.styleFrom(
+  //             backgroundColor: Colors.white,
+  //             foregroundColor: const Color(0xFF0B6F17),
+  //             side: const BorderSide(color: Color(0xFF0B6F17)),
+  //             shape: RoundedRectangleBorder(
+  //               borderRadius: BorderRadius.circular(5.r),
+  //             ),
+  //           ),
+  //           child: const Text('Preview'),
+  //         ),
+  //       ),
+  //       SizedBox(height: 6.h),
+  //       SizedBox(
+  //         width: double.infinity,
+  //         height: 30.h,
+  //         child: ElevatedButton(
+  //           onPressed: () async {
+  //
+  //             if (book?.pdfUrl == null) {
+  //               _showErrorSnackBar('Book not available. Please check later.');
+  //               return;
+  //             }
+  //             try {
+  //               if (book?.price != null && book?.price != 'free') {
+  //                 await bookProvider.addBookToCart(book!.id);
+  //               } else {
+  //                 await bookProvider.addBookToLibrary(book!.id);
+  //               }
+  //
+  //               if (bookProvider.error == null) {
+  //                 _showAddedToCartDialog(book!.price != 'free');
+  //               } else {
+  //                 if (bookProvider.error!.contains('already in cart')) {
+  //                   _showErrorSnackBar('Book already in Cart', isAlreadyInCart: true);
+  //                 } else if (bookProvider.error!.contains('already in library')) {
+  //                   _showErrorSnackBar('Book already in Library', isAlreadyInLibrary: true);
+  //                 } else {
+  //                   _showErrorSnackBar(bookProvider.error!);
+  //                 }
+  //               }
+  //             } catch (e) {
+  //               _showErrorSnackBar('An error occurred. Please try again.');
+  //             }
+  //           },
+  //           style: ElevatedButton.styleFrom(
+  //             backgroundColor: Colors.white,
+  //             foregroundColor: const Color(0xFF0B6F17),
+  //             side: const BorderSide(color: Color(0xFF0B6F17)),
+  //             shape: RoundedRectangleBorder(
+  //               borderRadius: BorderRadius.circular(5.r),
+  //             ),
+  //           ),
+  //           child: Text(book?.price != null && book?.price != 'free'
+  //               ? 'Add to Cart'
+  //               : 'Add to Library'),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
 
   void _showErrorSnackBar(String message, {bool? isAlreadyInCart, bool? isAlreadyInLibrary}) {
@@ -537,17 +608,22 @@ class _BookPreviewPageState extends State<BookPreviewPage> {
                 ),
                 Consumer<BookProvider>(
                   builder: (context, bookProvider, child) {
+                    bool isFree = widget.book.price == null ||
+                        widget.book.price.trim().toLowerCase() == 'free' ||
+                        widget.book.price == '0' ||
+                        widget.book.price.trim().isEmpty;
+
                     return ElevatedButton(
                       onPressed: () async {
                         try {
-                          if (widget.book.price != null && widget.book.price != 'free') {
-                            await bookProvider.addBookToCart(widget.book.id);
-                          } else {
+                          if (isFree) {
                             await bookProvider.addBookToLibrary(widget.book.id);
+                          } else {
+                            await bookProvider.addBookToCart(widget.book.id);
                           }
 
                           if (bookProvider.error == null) {
-                            _showAddedToCartDialog(widget.book.price != 'free');
+                            _showAddedToCartDialog(!isFree);
                           } else {
                             if (bookProvider.error!.contains('already in cart')) {
                               _showErrorSnackBar('Book already in Cart', isAlreadyInCart: true);
@@ -569,9 +645,7 @@ class _BookPreviewPageState extends State<BookPreviewPage> {
                           borderRadius: BorderRadius.circular(5.r),
                         ),
                       ),
-                      child: Text(widget.book.price != null && widget.book.price != 'free'
-                          ? 'Add to Cart'
-                          : 'Add to Library'),
+                      child: Text(isFree ? 'Add to Library' : 'Add to Cart'),
                     );
                   },
                 ),

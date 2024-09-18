@@ -22,7 +22,7 @@ class _NewReleaseContainerState extends State<NewReleaseContainer> {
   Future<void> fetchLatestBook() async {
     setState(() => _isLoading = true);
     try {
-      final response = await http.get(Uri.parse('https:seedapp.vercel.app/api/featured'));
+      final response = await http.get(Uri.parse('https://seedapp.vercel.app/api/featured'));
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
@@ -65,7 +65,7 @@ class _NewReleaseContainerState extends State<NewReleaseContainer> {
               ],
             ),
             child: latestBook == null
-                ? const SizedBox(height: 120, child: Center(child: Text('No new release available')))
+                ? const SizedBox(height: 120, child: Center(child: Text('Reload to get access')))
                 : Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -138,7 +138,7 @@ class _NewReleaseContainerState extends State<NewReleaseContainer> {
                 vertical: 4,
               ),
               child: const Text(
-                'Feature',
+                'Featured',
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,

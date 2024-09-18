@@ -1,6 +1,6 @@
 
 class ApiRoutes{
-static const String baseUrl = 'https:seedapp.vercel.app/api';
+static const String baseUrl = 'https://seedapp.vercel.app/api';
 static const String registerEndpoint = '$baseUrl/user';
 static const String loginEndpoint = '$baseUrl/user/login';
 static const String newReleaseEndpoint = '$baseUrl/featured';
