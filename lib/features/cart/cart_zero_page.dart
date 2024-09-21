@@ -167,7 +167,7 @@ class _CartPageState extends State<CartPage> {
       itemCount: cartProvider.cartBooks.length,
       itemBuilder: (context, index) {
         final cartItem = cartProvider.cartBooks[index];
-        final book = cartItem['bookId'];
+        final book = BookModel.fromJson(cartItem['bookId']);
         return Card(
           margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
           child: Padding(
@@ -181,7 +181,7 @@ class _CartPageState extends State<CartPage> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(5),
                       child: Image.network(
-                        book['imageUrl'] ?? '',
+                        book.imageUrl?? '',
                         width: 80.w,
                         height: 100.h,
                         fit: BoxFit.cover,
@@ -195,18 +195,18 @@ class _CartPageState extends State<CartPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        book['title'] ?? '',
+                        book.title?? '',
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
-                        book['author'] ?? '',
-                        style: TextStyle(fontSize: 14.sp),
+                        book.authors.join(', ')?? '',
+                        style: TextStyle(fontSize: 16.sp),
                       ),
                       Text(
-                        '₦${cartItem['bookId']['price']}',
+                        '₦${book.price}',
                         style: TextStyle(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
@@ -218,7 +218,7 @@ class _CartPageState extends State<CartPage> {
                 IconButton(
                   icon: const Icon(Icons.delete),
                   onPressed: () async {
-                    if (book['_id'] != null) {
+                    if (book.id!= null) {
                       bool confirm = await showDialog(
                         context: context,
                         builder: (BuildContext context) {
@@ -259,7 +259,7 @@ class _CartPageState extends State<CartPage> {
                             },
                           );
 
-                          await cartProvider.removeFromCart(book['_id']);
+                          await cartProvider.removeFromCart(book.id);
 
                           // Hide loading indicator
                           Navigator.of(context).pop();

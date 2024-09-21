@@ -102,6 +102,9 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                     horizontal: 16.w,
                     vertical: 8.h,
                   ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5), // You can change this to 3 if preferred
+                  ),
                 ),
                 child: Text(isAddedToCart ? 'View Cart Items' : 'Continue'),
               ),

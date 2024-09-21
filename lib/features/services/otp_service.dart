@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 Future<void> sendOTP(String email) async {
 
   final response = await http.post(
-    Uri.parse('https://bookappbackend-csjm.onrender.com/api/forgetPassword'), // Note the single forward slash
+    Uri.parse('https://seedapp.vercel.app/api/forgetPassword'), // Note the single forward slash
     headers: <String, String>{
       'Content-Type': 'application/json',
     },

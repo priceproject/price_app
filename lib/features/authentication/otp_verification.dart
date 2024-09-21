@@ -24,6 +24,7 @@ class _VerificationState extends State<Verification> {
   }
 
   bool _isLoading = false;
+  bool _isResending = false;
 
 
   Future<void> verifyOTP(String email, String otp) async {
@@ -55,68 +56,120 @@ class _VerificationState extends State<Verification> {
     }
   }
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar,
+      appBar: AppBar(),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              'OTP Verification',
-              style: KHeadingTextStyle,
+          ? const Center(child: CircularProgressIndicator(
+        color: Color(0xFF0B6F17),
+      ))
+          : Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.all(20.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      'OTP Verification',
+                      style: KHeadingTextStyle.copyWith(fontSize: 24.sp),
+                    ),
+                    SizedBox(height: 10.h),
+                    Text(
+                      'Enter the 4-digit verification code we just sent to ${widget.email}',
+                      style: KSubHeadingTextStyle.copyWith(fontSize: 16.sp),
+                    ),
+                    SizedBox(height: 15.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _buildOTPField(0),
+                        _buildOTPField(1),
+                        _buildOTPField(2),
+                        _buildOTPField(3),
+                      ],
+                    ),
+                    SizedBox(height: 80.h),
+                    MyElevatedButton(
+                      onPressed: () {
+                        final otp = _otpControllers.map((controller) => controller.text).join();
+                        verifyOTP(widget.email, otp);
+                      },
+                      buttonText: 'Verify',
+                    ),
+                  ],
+                ),
+              ),
             ),
-            Text(
-              'Enter the 4-digit verification code we just sent to ${widget.email}',
-              style: KSubHeadingTextStyle,
-            ),
-            const SizedBox(height: 15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _buildOTPField(0),
-                _buildOTPField(1),
-                _buildOTPField(2),
-                _buildOTPField(3),
-              ],
-            ),
-            const SizedBox(height: 80),
-            MyElevatedButton(
-              onPressed: () {
-                final otp = _otpControllers.map((controller) => controller.text).join();
-                verifyOTP(widget.email, otp);
-                print(otp);
-              },
-              buttonText: 'Verify',
-            ),
-            const Spacer(),
-            BottomActionText(
+          ),
+          Padding(
+            padding: EdgeInsets.all(20.w),
+            child: _isResending
+                ? const Center(
+              child: CircularProgressIndicator(
+                color: Color(0xFF0B6F17),
+              ),
+            )
+                : BottomActionText(
               question: "Did not receive code?",
               action: 'Resend',
               onTap: () {
-// Resend OTP here
-                sendOTP(widget.email);
+                // Resend OTP here
+                setState(() {
+                  _isResending = true;
+                });
+                sendOTP(widget.email).then((success) {
+                  setState(() {
+                    _isResending = false;
+                  });
+
+                  // Show success message
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('OTP sent successfully. Check your email.'),
+                      backgroundColor: Color(0xFF0B6F17),
+                    ),
+                  );
+                }).catchError((error) {
+                  setState(() {
+                    _isResending = false;
+                  });
+
+                  // Show error message if OTP sending fails
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Failed to send OTP. Please try again.'),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                });
               },
             ),
-          ],
-        ),
+          )
+
+        ],
       ),
     );
   }
+
   Widget _buildOTPField(int index) {
     return SizedBox(
-      width: 50,
+      width: 50.w,
       child: TextFormField(
         controller: _otpControllers[index],
         textAlign: TextAlign.center,
         keyboardType: TextInputType.number,
         maxLength: 1,
-        decoration: const InputDecoration(
+        style: TextStyle(fontSize: 18.sp),
+        decoration: InputDecoration(
           counterText: '',
-          border: OutlineInputBorder(),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.r),
+          ),
+          contentPadding: EdgeInsets.symmetric(vertical: 12.h),
         ),
         onChanged: (value) {
           if (value.isNotEmpty) {

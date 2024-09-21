@@ -91,7 +91,7 @@ class CartProvider with ChangeNotifier {
     String? token = await _secureStorage.read(key: 'token');
     try {
       final response = await http.delete(
-        Uri.parse('https://book-app-backend-theta.vercel.app/api/clearCart'),
+        Uri.parse('https://seedapp.vercel.app/api/clearCart'),
         headers: {
           'Authorization': 'Bearer $token',
         },

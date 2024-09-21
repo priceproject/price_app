@@ -55,54 +55,64 @@ class _NewPasswordState extends State<NewPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar,
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text('Create new Password', style: KHeadingTextStyle),
-              Text(
-                'Your new password must be unique from those previously used.',
-                style: KSubHeadingTextStyle,
+      appBar: AppBar(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(20.w),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: ScreenUtil().screenHeight - AppBar().preferredSize.height - MediaQuery.of(context).padding.top,
+            ),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text('Create new Password', style: KHeadingTextStyle.copyWith(fontSize: 24.sp)),
+                  SizedBox(height: 10.h),
+                  Text(
+                    'Your new password must be unique from those previously used.',
+                    style: KSubHeadingTextStyle.copyWith(fontSize: 16.sp),
+                  ),
+                  SizedBox(height: 15.h),
+                  TextFormField(
+                    controller: _newPasswordController,
+                    obscureText: true,
+                    decoration: buildInputDecoration("New Password", Icons.lock),
+                    style: TextStyle(fontSize: 16.sp),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a new password';
+                      }
+                      if (value.length < 8) {
+                        return 'Password must be at least 8 characters long';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 10.h),
+                  TextFormField(
+                    controller: _confirmPasswordController,
+                    obscureText: true,
+                    decoration: buildInputDecoration("Confirm Password", Icons.lock),
+                    style: TextStyle(fontSize: 16.sp),
+                    validator: (value) {
+                      if (value != _newPasswordController.text) {
+                        return 'Passwords do not match';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 80.h),
+                  _isLoading
+                      ? Center(child: CircularProgressIndicator(strokeWidth: 3.w, color: Color(0xFF0B6F17),))
+                      : MyElevatedButton(
+                    buttonText: 'Reset Password',
+                    onPressed: resetPassword,
+                  ),
+                ],
               ),
-              const SizedBox(height: 15),
-              TextFormField(
-                controller: _newPasswordController,
-                obscureText: true,
-                decoration: buildInputDecoration("New Password", Icons.lock),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a new password';
-                  }
-                  if (value.length < 6) {
-                    return 'Password must be at least 6 characters long';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: _confirmPasswordController,
-                obscureText: true,
-                decoration: buildInputDecoration("Confirm Password", Icons.lock),
-                validator: (value) {
-                  if (value != _newPasswordController.text) {
-                    return 'Passwords do not match';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 80),
-              _isLoading
-                  ? const Center(child: CircularProgressIndicator())
-                  : MyElevatedButton(
-                buttonText: 'Reset Password',
-                onPressed: resetPassword,
-              ),
-            ],
+            ),
           ),
         ),
       ),

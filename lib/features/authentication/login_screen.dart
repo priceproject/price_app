@@ -15,8 +15,6 @@ class _LoginState extends State<Login> {
   Future<void> printStoredToken() async {
     final token = await _secureStorage.read(key: 'token');
     final userId = await _secureStorage.read(key: 'userId');
-    print('Stored token: $token');
-    print('Stored ID: $userId');
   }
 
   Future<void> _performLogin(BuildContext context, AuthServiceProvider provider) async {
@@ -73,54 +71,57 @@ class _LoginState extends State<Login> {
                         provider.emailController.clear();
                         provider.passwordController.clear();
                       },
-                      child: Padding(
-                        padding: EdgeInsets.all(20.0.r),
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Text(
-                                'Welcome back.',
-                                style: KHeadingTextStyle,
-                              ),
-                              Text(
-                                'Glad to see you Again!',
-                                style: KHeadingTextStyle,
-                              ),
-                              SizedBox(height: 15.h),
-                              TextFormField(
-                                autofocus: false,
-                                controller: provider.emailController,
-                                validator: provider.validateEmail,
-                                decoration: buildInputDecoration("Enter Email", Icons.email),
-                              ),
-                              SizedBox(height: 10.h),
-                              TextFormField(
-                                autofocus: false,
-                                obscureText: true,
-                                controller: provider.passwordController,
-                                validator: provider.validatePassword,
-                                decoration: buildInputDecoration("Enter Password", Icons.lock),
-                              ),
-                              const ForgotPassword(),
-                              SizedBox(height: 80.h),
-                              MyElevatedButton(
-                                buttonText: 'Login',
-                                onPressed: _isLoading ? () {} : () => _performLogin(context, provider),
-                              ),
-                              const Spacer(),
-                              BottomActionText(
-                                question: "Don't have an account",
-                                action: 'Register Here',
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => const Registration1()),
-                                  );
-                                },
-                              )
-                            ],
+                      child: SingleChildScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        child: Padding(
+                          padding: EdgeInsets.all(20.0.r),
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Text(
+                                  'Welcome back.',
+                                  style: KHeadingTextStyle,
+                                ),
+                                Text(
+                                  'Glad to see you Again!',
+                                  style: KHeadingTextStyle,
+                                ),
+                                SizedBox(height: 15.h),
+                                TextFormField(
+                                  autofocus: false,
+                                  controller: provider.emailController,
+                                  validator: provider.validateEmail,
+                                  decoration: buildInputDecoration("Enter Email", Icons.email),
+                                ),
+                                SizedBox(height: 10.h),
+                                TextFormField(
+                                  autofocus: false,
+                                  obscureText: true,
+                                  controller: provider.passwordController,
+                                  validator: provider.validatePassword,
+                                  decoration: buildInputDecoration("Enter Password", Icons.lock),
+                                ),
+                                const ForgotPassword(),
+                                SizedBox(height: 80.h),
+                                MyElevatedButton(
+                                  buttonText: 'Login',
+                                  onPressed: _isLoading ? () {} : () => _performLogin(context, provider),
+                                ),
+                                SizedBox(height: 80.h),
+                                BottomActionText(
+                                  question: "Don't have an account",
+                                  action: 'Register Here',
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => const Registration1()),
+                                    );
+                                  },
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),

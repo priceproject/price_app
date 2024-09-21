@@ -49,7 +49,7 @@ export 'package:price_app/features/community/seed_assist.dart';
 export 'package:price_app/features/utils/user_model.dart';
 export 'package:price_app/features/providers/user_profile_provider.dart';
 export 'package:price_app/features/providers/cart_provider.dart';
-export 'package:flutterwave_standard/flutterwave.dart';
+// export 'package:flutterwave_standard/flutterwave.dart';
 export 'package:path_provider/path_provider.dart';
 export 'package:price_app/features/providers/library_provider.dart';
 export 'package:shared_preferences/shared_preferences.dart';

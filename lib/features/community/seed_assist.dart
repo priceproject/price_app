@@ -44,7 +44,7 @@ class _CustomerSupportPageState extends State<CustomerSupportPage> with WidgetsB
     try {
       await FlutterEmailSender.send(email);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Email sent succefully')),
+          const SnackBar(content: Text('Email sent successfully')),
         );
     } catch (error) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -67,30 +67,50 @@ class _CustomerSupportPageState extends State<CustomerSupportPage> with WidgetsB
   }
 
 
-  String? encodeQueryParameters(Map<String, String> params) {
-    return params.entries
-        .map((e) => '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
-        .join('&');
-  }
+  // Future<void> launchWhatsApp() async {
+  //   const whatsappUrl = "https://wa.me/+2348080185270"; // Replace with your WhatsApp number
+  //   if (await canLaunch(whatsappUrl)) {
+  //     await launch(whatsappUrl);
+  //   } else {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text('Could not launch WhatsApp')),
+  //     );
+  //   }
+  // }
+  //
+  // Future<void> launchTelegram() async {
+  //   const telegramUrl = "https://t.me/NtlePrice"; // Replace with your Telegram username
+  //   if (await canLaunch(telegramUrl)) {
+  //     await launch(telegramUrl);
+  //   } else {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text('Could not launch Telegram')),
+  //     );
+  //   }
+  // }
 
   Future<void> launchWhatsApp() async {
-    const whatsappUrl = "https://wa.me/+2348080185270"; // Replace with your WhatsApp number
-    if (await canLaunch(whatsappUrl)) {
-      await launch(whatsappUrl);
-    } else {
+    final Uri whatsappUri = Uri.parse("https://wa.me/+2348080185270");
+    try {
+      if (!await launchUrl(whatsappUri, mode: LaunchMode.externalApplication)) {
+        throw Exception('Could not launch WhatsApp');
+      }
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Could not launch WhatsApp')),
+        SnackBar(content: Text('Could not launch WhatsApp: ${e.toString()}')),
       );
     }
   }
 
   Future<void> launchTelegram() async {
-    const telegramUrl = "https://t.me/NtlePrice"; // Replace with your Telegram username
-    if (await canLaunch(telegramUrl)) {
-      await launch(telegramUrl);
-    } else {
+    final Uri telegramUri = Uri.parse("https://t.me/NtlePrice");
+    try {
+      if (!await launchUrl(telegramUri, mode: LaunchMode.externalApplication)) {
+        throw Exception('Could not launch Telegram');
+      }
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Could not launch Telegram')),
+        SnackBar(content: Text('Could not launch Telegram: ${e.toString()}')),
       );
     }
   }
