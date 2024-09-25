@@ -35,7 +35,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
     await userProvider.fetchUserProfile(userId!);
     await cartProvider.fetchCartData();
   }
-
+  
+  //still having issue with _handlePayment
   Future<void> _handlePayment(double amount, User user, List<dynamic> cartBooks) async {
     final amountInKobo = (amount * 100).toInt();
 
@@ -89,6 +90,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
       _showMessage("An error occurred: $e", isError: true);
     }
   }
+  //still having issue with _handlePayment
 
   Future<void> _checkPaymentStatus() async {
     if (transactionId == null) {
