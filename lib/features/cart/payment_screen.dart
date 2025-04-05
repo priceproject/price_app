@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:http/http.dart' as http;
+import 'package:price_app/features/services/payment_service.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({Key? key}) : super(key: key);
@@ -15,8 +15,7 @@ class PaymentScreen extends StatefulWidget {
 
 class _PaymentScreenState extends State<PaymentScreen> {
   final _secureStorage = const FlutterSecureStorage();
-  final String publicKey = 'FLWPUBK-a4dd6db1eaf634be117d5440ae234b61-X';
-  final String secretKey = 'FLWSECK-a5885510edd1892f8f569996d8715ddb-19206a65e56vt-X';
+  final _paymentService = PaymentService();
   String? transactionId;
 
   @override
@@ -36,54 +35,36 @@ class _PaymentScreenState extends State<PaymentScreen> {
     await cartProvider.fetchCartData();
   }
 
-  Future<void> _handlePayment(double amount, User user, List<dynamic> cartBooks) async {
-    final amountInKobo = (amount * 100).toInt();
-
-    // Create a payment payload
-    final payload = {
-      "tx_ref": "hooli-tx-1920bbtytty",
-      "amount": amountInKobo,
-      "currency": "NGN",
-      "redirect_url": "https://www.google.com",
-      "meta": {
-        "consumer_id": 23,
-        "consumer_mac": "92a3-912ba-1192a"
-      },
-      "customer": {
-        "email": user.email,
-        "phonenumber": user.phoneNumber,
-        "name": "${user.firstName} ${user.lastName}"
-      },
-      "customizations": {
-        "title": "Parchment Payment",
-        "logo": "https://assets.piedpiper.com/logo.png"
-      }
-    };
-
+  Future<void> _handlePayment(
+      double amount, User user, List<dynamic> cartBooks) async {
     try {
-      final response = await http.post(
-        Uri.parse('https://api.flutterwave.com/v3/payments'),
-        headers: {
-          'Authorization': 'Bearer $secretKey',
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode(payload),
+      String? token = await _secureStorage.read(key: 'token');
+      if (token == null) throw Exception('Authentication token not found');
+
+      final response = await _paymentService.initializePayment(
+        token: token,
+        amount: amount,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        phoneNumber: user.phoneNumber,
+        cartBooks: cartBooks,
       );
 
-      if (response.statusCode == 200) {
-        final responseData = jsonDecode(response.body);
-        final paymentLink = responseData['data']['link'];
-        transactionId = responseData['data']['id'].toString();
+      if (response['status'] == 'success') {
+        final paymentLink = response['data']['paymentLink'];
+        transactionId = response['data']['transactionId'];
 
         if (await canLaunchUrl(Uri.parse(paymentLink))) {
-          await launchUrl(Uri.parse(paymentLink),mode:LaunchMode.externalApplication);
+          await launchUrl(Uri.parse(paymentLink),
+              mode: LaunchMode.externalApplication);
           // After redirecting, handle the process to check if payment is complete
           await _checkPaymentStatus();
         } else {
           throw 'Could not launch payment link';
         }
       } else {
-        throw 'Failed to initiate payment';
+        throw response['message'] ?? 'Failed to initialize payment';
       }
     } catch (e) {
       _showMessage("An error occurred: $e", isError: true);
@@ -97,27 +78,24 @@ class _PaymentScreenState extends State<PaymentScreen> {
     }
 
     try {
-      final response = await http.get(
-        Uri.parse('https://api.flutterwave.com/v3/transactions/$transactionId/verify'),
-        headers: {
-          'Authorization': 'Bearer $secretKey',
-          'Content-Type': 'application/json',
-        },
+      String? token = await _secureStorage.read(key: 'token');
+      if (token == null) throw Exception('Authentication token not found');
+
+      final response = await _paymentService.verifyPayment(
+        token: token,
+        transactionId: transactionId!,
       );
 
-      if (response.statusCode == 200) {
-        final responseData = jsonDecode(response.body);
-        if (responseData['status'] == 'success' &&
-            responseData['data']['status'] == 'successful') {
-          _onPaymentSuccess();
-        } else {
-          _showMessage("Payment was not completed. Please try again.", isError: true);
-        }
+      if (response['status'] == 'success' &&
+          response['data']['status'] == 'successful') {
+        _onPaymentSuccess();
       } else {
-        throw 'Failed to verify payment';
+        _showMessage("Payment was not completed. Please try again.",
+            isError: true);
       }
     } catch (e) {
-      _showMessage("An error occurred while verifying payment: $e", isError: true);
+      _showMessage("An error occurred while verifying payment: $e",
+          isError: true);
     }
   }
 
@@ -136,7 +114,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
         try {
           await bookProvider.addBookToLibrary(cartItem['bookId']['_id']);
         } catch (e) {
-          print("Failed to add book ${cartItem['bookId']['title']} to library: $e");
+          print(
+              "Failed to add book ${cartItem['bookId']['title']} to library: $e");
         }
       }
 
@@ -166,7 +145,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
             if (user == null || cartBooks.isEmpty) {
               return Scaffold(
                 appBar: AppBar(title: const Text("Payment")),
-                body: const Center(child: CircularProgressIndicator(color: Color(0xFF0B6F17))),
+                body: const Center(
+                    child: CircularProgressIndicator(color: Color(0xFF0B6F17))),
               );
             }
 
@@ -176,7 +156,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   elevation: 200,
                   leading: IconButton(
                     icon: const Icon(Icons.arrow_back, color: Colors.white),
-                    onPressed: () => Navigator.of(context).pushReplacementNamed('/cart_zero'),
+                    onPressed: () => Navigator.of(context)
+                        .pushReplacementNamed('/cart_zero'),
                   ),
                   title: const Text(
                     "Payment",
@@ -184,20 +165,21 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
-                  )
-              ),
+                  )),
               body: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Payment Details:', style: Theme.of(context).textTheme.headlineMedium),
+                    Text('Payment Details:',
+                        style: Theme.of(context).textTheme.headlineMedium),
                     const SizedBox(height: 10),
                     Text('Name: ${user.firstName} ${user.lastName}'),
                     Text('Email: ${user.email}'),
                     Text('Phone: ${user.phoneNumber}'),
                     const SizedBox(height: 20),
-                    Text('Cart Items:', style: Theme.of(context).textTheme.titleMedium),
+                    Text('Cart Items:',
+                        style: Theme.of(context).textTheme.titleMedium),
                     Expanded(
                       child: ListView.builder(
                         itemCount: cartBooks.length,
@@ -213,8 +195,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     const SizedBox(height: 20),
                     Text(
                         'Total Amount: ₦${cartProvider.calculateTotal().toStringAsFixed(2)}',
-                        style: Theme.of(context).textTheme.headlineMedium
-                    ),
+                        style: Theme.of(context).textTheme.headlineMedium),
                     const SizedBox(height: 20),
                     MyElevatedButton(
                       buttonText: 'Make Payment',

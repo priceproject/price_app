@@ -1,8 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:price_app/features/utils/exports.dart';
 
-
-
 class BookDetailsScreen extends StatefulWidget {
   final String bookId;
 
@@ -23,6 +21,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
       context.read<BookProvider>().fetchBookData(widget.bookId);
     });
   }
+
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
@@ -84,16 +83,15 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                   if (isAddedToCart) {
                     Navigator.of(context).pushNamedAndRemoveUntil(
                       '/cart_zero',
-                          (route) => false,
+                      (route) => false,
                     );
                   } else {
                     Navigator.of(context).pushNamedAndRemoveUntil(
                       '/library',
-                          (route) => false,
+                      (route) => false,
                     );
                   }
                 },
-
                 style: ElevatedButton.styleFrom(
                   foregroundColor: const Color(0xFF0B6F17),
                   backgroundColor: Colors.white,
@@ -103,7 +101,8 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                     vertical: 8.h,
                   ),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5), // You can change this to 3 if preferred
+                    borderRadius: BorderRadius.circular(
+                        5), // You can change this to 3 if preferred
                   ),
                 ),
                 child: Text(isAddedToCart ? 'View Cart Items' : 'Continue'),
@@ -129,87 +128,90 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
             leading: IconButton(
               icon: const Icon(
                 Icons.arrow_back,
-                color: Colors.white,),
+                color: Colors.white,
+              ),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            title: Text(book?.title ?? '',
+            title: Text(
+              book?.title ?? '',
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
-              ),),
-          ),
-          body: isLoading
-              ? const Center(child: CircularProgressIndicator(
-            color: Color(0xFF0B6F17),
-          ))
-              : SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.all(16.r),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Image.network(
-                          book?.imageUrl ?? '',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      SizedBox(width: 16.w),
-                      Expanded(
-                        flex: 3,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              book?.title ?? '',
-                              style: TextStyle(
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            SizedBox(height: 8.h),
-                            Text(
-                              book?.authors.join(', ') ?? '',
-                              style: TextStyle(fontSize: 16.sp),
-                            ),
-                            SizedBox(height: 8.h),
-                            Text(
-                              'Price: ${_formatPrice(book?.price)}',
-                              style: TextStyle(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: 20.h),
-                            _buildActionButtons(book, bookProvider),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  // SizedBox(height: 16.h),
-                  // _buildActionButtons(book, bookProvider),
-                  SizedBox(height: 40.h),
-                  _buildDescriptionAuthorToggle(),
-                  SizedBox(height: 16.h),
-                  _showDescription
-                      ? _buildExpandableText(book?.aboutBook ?? '')
-                      : _buildExpandableText(book?.aboutAuthor ?? ''),
-                ],
               ),
             ),
           ),
+          body: isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(
+                  color: Color(0xFF0B6F17),
+                ))
+              : SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.all(16.r),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: Image.network(
+                                book?.imageUrl ?? '',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            SizedBox(width: 16.w),
+                            Expanded(
+                              flex: 3,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    book?.title ?? '',
+                                    style: TextStyle(
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    maxLines: 3,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  SizedBox(height: 8.h),
+                                  Text(
+                                    book?.authors.join(', ') ?? '',
+                                    style: TextStyle(fontSize: 16.sp),
+                                  ),
+                                  SizedBox(height: 8.h),
+                                  Text(
+                                    'Price: ${_formatPrice(book?.price)}',
+                                    style: TextStyle(
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: 20.h),
+                                  _buildActionButtons(book, bookProvider),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        // SizedBox(height: 16.h),
+                        // _buildActionButtons(book, bookProvider),
+                        SizedBox(height: 40.h),
+                        _buildDescriptionAuthorToggle(),
+                        SizedBox(height: 16.h),
+                        _showDescription
+                            ? _buildExpandableText(book?.aboutBook ?? '')
+                            : _buildExpandableText(book?.aboutAuthor ?? ''),
+                      ],
+                    ),
+                  ),
+                ),
         );
       },
     );
   }
-
 
   Widget _buildActionButtons(BookModel? book, BookProvider bookProvider) {
     bool isFree = book?.price == null ||
@@ -256,9 +258,12 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                   _showAddedToCartDialog(!isFree);
                 } else {
                   if (bookProvider.error!.contains('already in cart')) {
-                    _showErrorSnackBar('Book already in Cart', isAlreadyInCart: true);
-                  } else if (bookProvider.error!.contains('already in library')) {
-                    _showErrorSnackBar('Book already in Library', isAlreadyInLibrary: true);
+                    _showErrorSnackBar('Book already in Cart',
+                        isAlreadyInCart: true);
+                  } else if (bookProvider.error!
+                      .contains('already in library')) {
+                    _showErrorSnackBar('Book already in Library',
+                        isAlreadyInLibrary: true);
                   } else {
                     _showErrorSnackBar(bookProvider.error!);
                   }
@@ -350,8 +355,8 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
   //   );
   // }
 
-
-  void _showErrorSnackBar(String message, {bool? isAlreadyInCart, bool? isAlreadyInLibrary}) {
+  void _showErrorSnackBar(String message,
+      {bool? isAlreadyInCart, bool? isAlreadyInLibrary}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Row(
@@ -363,7 +368,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
                   Navigator.of(context).pushNamedAndRemoveUntil(
                     isAlreadyInCart == true ? '/cart_zero' : '/library',
-                        (route) => false,
+                    (route) => false,
                   );
                 },
                 child: Text(
@@ -373,7 +378,9 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
               ),
           ],
         ),
-        backgroundColor: isAlreadyInCart == true || isAlreadyInLibrary == true ? Color(0xFF0B6F17) : Colors.red,
+        backgroundColor: isAlreadyInCart == true || isAlreadyInLibrary == true
+            ? Color(0xFF0B6F17)
+            : Colors.red,
         duration: Duration(seconds: 4),
       ),
     );
@@ -389,8 +396,10 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
             child: ElevatedButton(
               onPressed: () => setState(() => _showDescription = true),
               style: ElevatedButton.styleFrom(
-                backgroundColor: _showDescription ? const Color(0xFF0B6F17) : Colors.white,
-                foregroundColor: _showDescription ? Colors.white : const Color(0xFF0B6F17),
+                backgroundColor:
+                    _showDescription ? const Color(0xFF0B6F17) : Colors.white,
+                foregroundColor:
+                    _showDescription ? Colors.white : const Color(0xFF0B6F17),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5.r),
                 ),
@@ -403,8 +412,10 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
             child: ElevatedButton(
               onPressed: () => setState(() => _showDescription = false),
               style: ElevatedButton.styleFrom(
-                backgroundColor: _showDescription ? Colors.white : const Color(0xFF0B6F17),
-                foregroundColor: _showDescription ? const Color(0xFF0B6F17) : Colors.white,
+                backgroundColor:
+                    _showDescription ? Colors.white : const Color(0xFF0B6F17),
+                foregroundColor:
+                    _showDescription ? const Color(0xFF0B6F17) : Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5.r),
                 ),
@@ -459,7 +470,6 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
   }
 }
 
-
 class BookPreviewPage extends StatefulWidget {
   final BookModel book;
   final int maxPages;
@@ -479,7 +489,8 @@ class _BookPreviewPageState extends State<BookPreviewPage> {
     _pdfViewerController = PdfViewerController();
   }
 
-  void _showErrorSnackBar(String message, {bool? isAlreadyInCart, bool? isAlreadyInLibrary}) {
+  void _showErrorSnackBar(String message,
+      {bool? isAlreadyInCart, bool? isAlreadyInLibrary}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Row(
@@ -491,7 +502,7 @@ class _BookPreviewPageState extends State<BookPreviewPage> {
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
                   Navigator.of(context).pushNamedAndRemoveUntil(
                     isAlreadyInCart == true ? '/cart_zero' : '/library',
-                        (route) => false,
+                    (route) => false,
                   );
                 },
                 child: Text(
@@ -501,7 +512,9 @@ class _BookPreviewPageState extends State<BookPreviewPage> {
               ),
           ],
         ),
-        backgroundColor: isAlreadyInCart == true || isAlreadyInLibrary == true ? Color(0xFF0B6F17) : Colors.red,
+        backgroundColor: isAlreadyInCart == true || isAlreadyInLibrary == true
+            ? Color(0xFF0B6F17)
+            : Colors.red,
         duration: Duration(seconds: 4),
       ),
     );
@@ -527,7 +540,7 @@ class _BookPreviewPageState extends State<BookPreviewPage> {
                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
                 Navigator.of(context).pushNamedAndRemoveUntil(
                   isAddedToCart ? '/cart_zero' : '/library',
-                      (route) => false,
+                  (route) => false,
                 );
               },
               child: Text(
@@ -556,110 +569,122 @@ class _BookPreviewPageState extends State<BookPreviewPage> {
           ),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text('Preview: ${widget.book.title}', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+        title: Text('Preview: ${widget.book.title}',
+            style: const TextStyle(
+                fontWeight: FontWeight.bold, color: Colors.white)),
       ),
       body: widget.book.pdfUrl != null && widget.book.pdfUrl!.isNotEmpty
           ? Column(
-        children: [
-          Expanded(
-            child: SfPdfViewer.network(
-              widget.book.pdfUrl!,
-              controller: _pdfViewerController,
-              enableDoubleTapZooming: true,
-              canShowScrollHead: false,
-              canShowPaginationDialog: false,
-              canShowScrollStatus: false,
-              pageLayoutMode: PdfPageLayoutMode.single,
-              interactionMode: PdfInteractionMode.pan,
-              scrollDirection: PdfScrollDirection.vertical,
-              enableTextSelection: false,
-              onDocumentLoaded: (PdfDocumentLoadedDetails details) {
-                if (details.document.pages.count > widget.maxPages) {
-                  Future.delayed(Duration.zero, () {
-                    _pdfViewerController.jumpToPage(widget.maxPages);
-                  });
-                }
-              },
-              onPageChanged: (PdfPageChangedDetails details) {
-                if (details.newPageNumber > widget.maxPages) {
-                  _pdfViewerController.jumpToPage(widget.maxPages);
-                }
-              },
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(16.r),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: const Color(0xFF0B6F17),
-                    side: const BorderSide(color: Color(0xFF0B6F17)),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.r),
-                    ),
+                Expanded(
+                  child: SfPdfViewer.network(
+                    widget.book.pdfUrl!,
+                    controller: _pdfViewerController,
+                    enableDoubleTapZooming: true,
+                    canShowScrollHead: false,
+                    canShowPaginationDialog: false,
+                    canShowScrollStatus: false,
+                    pageLayoutMode: PdfPageLayoutMode.single,
+                    interactionMode: PdfInteractionMode.pan,
+                    scrollDirection: PdfScrollDirection.vertical,
+                    enableTextSelection: false,
+                    onDocumentLoaded: (PdfDocumentLoadedDetails details) {
+                      if (details.document.pages.count > widget.maxPages) {
+                        Future.delayed(Duration.zero, () {
+                          _pdfViewerController.jumpToPage(widget.maxPages);
+                        });
+                      }
+                    },
+                    onPageChanged: (PdfPageChangedDetails details) {
+                      if (details.newPageNumber > widget.maxPages) {
+                        _pdfViewerController.jumpToPage(widget.maxPages);
+                      }
+                    },
                   ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Back to Details',
-                  style: TextStyle(
-                    color: Color(0xFF0B6F17),
-                  )),
                 ),
-                Consumer<BookProvider>(
-                  builder: (context, bookProvider, child) {
-                    bool isFree = widget.book.price == null ||
-                        widget.book.price.trim().toLowerCase() == 'free' ||
-                        widget.book.price == '0' ||
-                        widget.book.price.trim().isEmpty;
-
-                    return ElevatedButton(
-                      onPressed: () async {
-                        try {
-                          if (isFree) {
-                            await bookProvider.addBookToLibrary(widget.book.id);
-                          } else {
-                            await bookProvider.addBookToCart(widget.book.id);
-                          }
-
-                          if (bookProvider.error == null) {
-                            _showAddedToCartDialog(!isFree);
-                          } else {
-                            if (bookProvider.error!.contains('already in cart')) {
-                              _showErrorSnackBar('Book already in Cart', isAlreadyInCart: true);
-                            } else if (bookProvider.error!.contains('already in library')) {
-                              _showErrorSnackBar('Book already in Library', isAlreadyInLibrary: true);
-                            } else {
-                              _showErrorSnackBar(bookProvider.error!);
-                            }
-                          }
-                        } catch (e) {
-                          _showErrorSnackBar('An error occurred. Please try again.');
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        foregroundColor: const Color(0xFF0B6F17),
-                        side: const BorderSide(color: Color(0xFF0B6F17)),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.r),
+                Padding(
+                  padding: EdgeInsets.all(16.r),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          foregroundColor: const Color(0xFF0B6F17),
+                          side: const BorderSide(color: Color(0xFF0B6F17)),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5.r),
+                          ),
                         ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Back to Details',
+                            style: TextStyle(
+                              color: Color(0xFF0B6F17),
+                            )),
                       ),
-                      child: Text(isFree ? 'Add to Library' : 'Add to Cart'),
-                    );
-                  },
+                      Consumer<BookProvider>(
+                        builder: (context, bookProvider, child) {
+                          bool isFree = widget.book.price == null ||
+                              widget.book.price.trim().toLowerCase() ==
+                                  'free' ||
+                              widget.book.price == '0' ||
+                              widget.book.price.trim().isEmpty;
+
+                          return ElevatedButton(
+                            onPressed: () async {
+                              try {
+                                if (isFree) {
+                                  await bookProvider
+                                      .addBookToLibrary(widget.book.id);
+                                } else {
+                                  await bookProvider
+                                      .addBookToCart(widget.book.id);
+                                }
+
+                                if (bookProvider.error == null) {
+                                  _showAddedToCartDialog(!isFree);
+                                } else {
+                                  if (bookProvider.error!
+                                      .contains('already in cart')) {
+                                    _showErrorSnackBar('Book already in Cart',
+                                        isAlreadyInCart: true);
+                                  } else if (bookProvider.error!
+                                      .contains('already in library')) {
+                                    _showErrorSnackBar(
+                                        'Book already in Library',
+                                        isAlreadyInLibrary: true);
+                                  } else {
+                                    _showErrorSnackBar(bookProvider.error!);
+                                  }
+                                }
+                              } catch (e) {
+                                _showErrorSnackBar(
+                                    'An error occurred. Please try again.');
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              foregroundColor: const Color(0xFF0B6F17),
+                              side: const BorderSide(color: Color(0xFF0B6F17)),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.r),
+                              ),
+                            ),
+                            child:
+                                Text(isFree ? 'Add to Library' : 'Add to Cart'),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ],
-            ),
-          ),
-        ],
-      )
+            )
           : const Center(
-        child: Text('Preview not available for this book.'),
-      ),
+              child: Text('Preview not available for this book.'),
+            ),
     );
   }
 }
